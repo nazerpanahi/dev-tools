@@ -1,0 +1,25 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: check-shebang-scripts-are-executable
+      - id: check-merge-conflict
+      # - id: no-commit-to-branch
+      #   args:
+      #     - '-b'
+      #     - 'master'
+      - id: requirements-txt-fixer
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v1.3.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: []
+
