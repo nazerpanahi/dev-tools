@@ -8,4 +8,3 @@ docker-compose up
 
 ## References
 - [redis-dockerhub](https://hub.docker.com/_/redis)
-
