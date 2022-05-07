@@ -8,7 +8,7 @@ repos:
       - id: check-json
       - id: debug-statements
       - id: trailing-whitespace
-      - id: end-of-file-fixer
+      # - id: end-of-file-fixer # it's not compatible with .ipynb files
       - id: check-added-large-files
       - id: check-shebang-scripts-are-executable
       - id: check-merge-conflict
@@ -23,12 +23,16 @@ repos:
       - id: conventional-pre-commit
         # stages: [commit-msg]
         # args: []
+  - repo: https://github.com/asottile/reorder_python_imports
+    rev: v3.1.0
+    hooks:
+      - id: reorder-python-imports
   - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:
       - id: black
         # language_version: python3.6
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v1.2.3
+  - repo: https://github.com/pycqa/flake8
+    rev: 4.0.1
     hooks:
       - id: flake8
