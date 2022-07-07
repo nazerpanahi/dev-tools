@@ -1,0 +1,12 @@
+{
+    "list": [
+        {
+            "name": "cluster",
+            "host": "redis",
+            "port": 6379,
+            "password": "",
+            "id": "unique"
+        }
+    ],
+    "license": ""
+}
