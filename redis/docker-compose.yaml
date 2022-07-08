@@ -14,10 +14,10 @@ services:
   #     - REDIS_HOSTS=local:redis:6379
   #   ports:
   #     - "8081:8081"
-  reids-ui:
+  redis-ui:
     image: dockerhub.ir/patrikx3/p3x-redis-ui:2022.4.126
     ports:
-      - 7843:7843
+      - '7843:7843'
     volumes:
       - ./.p3xrs-conns.json:/settings/.p3xrs-conns.json:ro
 volumes:
