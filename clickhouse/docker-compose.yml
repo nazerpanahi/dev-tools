@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  clickhouse-server:
+    image: clickhouse/clickhouse-server:22.8.21
+    user: '101:101'
+    container_name: clickhouse-server
+    hostname: clickhouse-server
+    ports:
+      - 58123:8123
+      - 59000:9000
+    volumes:
+      - ${PWD}/fs/volumes/clickhouse/etc/clickhouse-server/config.d/config.xml:/etc/clickhouse-server/config.d/config.xml
+      - ${PWD}/fs/volumes/clickhouse/etc/clickhouse-server/users.d/users.xml:/etc/clickhouse-server/users.d/users.xml
+    depends_on:
+      - clickhouse-keeper
+  clickhouse-keeper:
+    image: clickhouse/clickhouse-keeper:22.8.21
+    user: '101:101'
+    container_name: clickhouse-keeper
+    hostname: clickhouse-keeper
+    volumes:
+      - ${PWD}/fs/volumes/clickhouse-keeper/etc/clickhouse-keeper/keeper_config.xml:/etc/clickhouse-keeper/keeper_config.xml
+    ports:
+      - 59181:9181
