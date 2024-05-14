@@ -10,8 +10,8 @@ services:
       - 58123:8123
       - 59000:9000
     volumes:
-      - ${PWD}/fs/volumes/clickhouse/etc/clickhouse-server/config.d/config.xml:/etc/clickhouse-server/config.d/config.xml
-      - ${PWD}/fs/volumes/clickhouse/etc/clickhouse-server/users.d/users.xml:/etc/clickhouse-server/users.d/users.xml
+      - ./fs/volumes/clickhouse-server/etc/clickhouse-server/config.d/config.xml:/etc/clickhouse-server/config.d/config.xml
+      - ./fs/volumes/clickhouse-server/etc/clickhouse-server/users.d/users.xml:/etc/clickhouse-server/users.d/users.xml
     depends_on:
       - clickhouse-keeper
   clickhouse-keeper:
@@ -20,6 +20,6 @@ services:
     container_name: clickhouse-keeper
     hostname: clickhouse-keeper
     volumes:
-      - ${PWD}/fs/volumes/clickhouse-keeper/etc/clickhouse-keeper/keeper_config.xml:/etc/clickhouse-keeper/keeper_config.xml
+      - ./fs/volumes/clickhouse-keeper/etc/clickhouse-keeper/keeper_config.xml:/etc/clickhouse-keeper/keeper_config.xml
     ports:
       - 59181:9181
