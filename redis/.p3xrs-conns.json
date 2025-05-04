@@ -1,11 +1,11 @@
 {
     "list": [
         {
-            "name": "cluster",
+            "name": "Local Redis",
             "host": "redis",
             "port": 6379,
-            "password": "",
-            "id": "unique"
+            "password": "redispassword",
+            "id": "unique-id-1"
         }
     ],
     "license": ""
