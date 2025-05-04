@@ -1,23 +1,29 @@
-version: '3.9'
-
 services:
   mongodb:
-    image: mongo:5.0
+    image: mongo:${MONGO_VERSION:-5.0}
+    container_name: mongodb-dev
     ports:
-      - "27017:27017"
+      - "${MONGO_PORT:-27017}:27017"
     volumes:
       - mongo-data:/data/db
-#    environment:
-#      - MONGO_INITDB_ROOT_USERNAME=root
-#      - MONGO_INITDB_ROOT_PASSWORD=12345678
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME:-root}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-12345678}
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017 --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   mongo-express:
     # https://github.com/mongo-express/mongo-express
     image: mongo-express:1.0.0-alpha.4
+    container_name: mongo-express-dev
     ports:
-      - "8081:8081"
+      - "${MONGO_EXPRESS_PORT:-8081}:8081"
     environment:
       - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
-      - ME_CONFIG_MONGODB_URL="mongodb://mongodb:27017"
+      - ME_CONFIG_MONGODB_URL=mongodb://${MONGO_USERNAME:-root}:${MONGO_PASSWORD:-12345678}@mongodb:27017/
     restart: always
     depends_on:
       - mongodb

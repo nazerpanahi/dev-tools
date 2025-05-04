@@ -1,0 +1,35 @@
+services:
+  clickhouse-server:
+    image: clickhouse/clickhouse-server:${CLICKHOUSE_VERSION:-22.8.21}
+    user: '101:101'
+    container_name: clickhouse-server-dev
+    hostname: clickhouse-server
+    ports:
+      - ${CLICKHOUSE_HTTP_PORT:-58123}:8123
+      - ${CLICKHOUSE_NATIVE_PORT:-59000}:9000
+    volumes:
+      - ./fs/volumes/clickhouse-server/etc/clickhouse-server/config.d/config.xml:/etc/clickhouse-server/config.d/config.xml
+      - ./fs/volumes/clickhouse-server/etc/clickhouse-server/users.d/users.xml:/etc/clickhouse-server/users.d/users.xml
+    depends_on:
+      - clickhouse-keeper
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping || exit 1
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+  clickhouse-keeper:
+    image: clickhouse/clickhouse-keeper:${CLICKHOUSE_KEEPER_VERSION:-22.8.21}
+    user: '101:101'
+    container_name: clickhouse-keeper-dev
+    hostname: clickhouse-keeper
+    volumes:
+      - ./fs/volumes/clickhouse-keeper/etc/clickhouse-keeper/keeper_config.xml:/etc/clickhouse-keeper/keeper_config.xml
+    ports:
+      - ${CLICKHOUSE_KEEPER_PORT:-59181}:9181
+    healthcheck:
+      test: clickhouse-keeper-client --port 9181 status || exit 1
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s

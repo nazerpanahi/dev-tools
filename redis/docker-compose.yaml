@@ -1,12 +1,17 @@
-version: '3.8'
 services:
   redis:
-    image: redis:6.2-alpine
+    image: redis:${REDIS_VERSION:-6.2-alpine}
+    container_name: redis-dev
     ports:
-      - '6380:6379'
-    command: redis-server --save 20 1 --loglevel warning
+      - '${REDIS_PORT:-6380}:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD:-redispassword}
     volumes:
       - redis-cache:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redispassword}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   # redis-commander:
   #   image: rediscommander/redis-commander:latest
   #   restart: always
@@ -16,10 +21,13 @@ services:
   #     - "8081:8081"
   redis-ui:
     image: dockerhub.ir/patrikx3/p3x-redis-ui:2022.4.126
+    container_name: redis-ui-dev
     ports:
-      - '7843:7843'
+      - "${REDIS_UI_PORT:-7843}:7843"
     volumes:
       - ./.p3xrs-conns.json:/settings/.p3xrs-conns.json:ro
+    depends_on:
+      - redis
 volumes:
   redis-cache:
     driver: local
