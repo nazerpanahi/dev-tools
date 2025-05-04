@@ -1,0 +1,19 @@
+# Env files
+**/.env
+
+# Local data volumes
+**/data/
+
+# Log files
+*.log
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db 
