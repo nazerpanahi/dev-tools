@@ -1,60 +1,60 @@
- # قوانین و استانداردهای پروژه Dev Tools
+# Dev Tools Project Rules and Standards
 
-این فایل شامل قوانین و استانداردهایی است که در توسعه این پروژه باید رعایت شوند.
+This file contains the rules and standards that must be followed when developing this project.
 
-## 1. ساختار پروژه
-- هر سرویس در دایرکتوری مخصوص به خود قرار دارد
-- هر سرویس باید شامل این فایل‌ها باشد:
-  - `docker-compose.yaml` - تنظیمات Docker Compose
-  - `README.md` - مستندات سرویس
-  - `.env.example` - نمونه فایل متغیرهای محیطی
+## 1. Project Structure
+- Each service is placed in its own directory
+- Each service must include these files:
+  - `docker-compose.yaml` - Docker Compose configuration
+  - `README.md` - Service documentation
+  - `.env.example` - Example environment variables file
 
-## 2. استانداردهای Docker Compose
-- پسوند فایل‌های Docker Compose باید `yaml` باشد (نه `yml`)
-- فیلد `version` نیاز نیست در فایل‌های Docker Compose تعریف شود (در نسخه‌های جدیدتر اختیاری است)
-- متغیرهای محیطی حساس باید در فایل `.env` قرار گیرند (این فایل در `.gitignore` قرار داده شده است)
-- یک فایل `.env.example` برای هر سرویس باید وجود داشته باشد تا متغیرهای لازم را مستند کند
+## 2. Docker Compose Standards
+- Docker Compose files must use the `yaml` extension (not `yml`)
+- The `version` field is not needed in Docker Compose files (it's optional in newer versions)
+- Sensitive environment variables should be placed in the `.env` file (this file is included in `.gitignore`)
+- An `.env.example` file should exist for each service to document required variables
 
-## 3. پیام‌های کامیت
-- همیشه از فرمت Conventional Commit استفاده کنید:
-  - `feat`: ویژگی جدید
-  - `fix`: رفع اشکال
-  - `docs`: تغییرات مستندات
-  - `style`: تغییرات مربوط به فرمت‌بندی (بدون تغییر کد)
-  - `refactor`: بازنویسی کد بدون تغییر در رفتار
-  - `test`: اضافه کردن یا اصلاح تست‌ها
-  - `chore`: به‌روزرسانی‌های روتین و تغییرات کوچک
-- مثال: `feat: add n8n workflow automation service`
+## 3. Commit Messages
+- Always use the Conventional Commit format:
+  - `feat`: New feature
+  - `fix`: Bug fix
+  - `docs`: Documentation changes
+  - `style`: Formatting changes (no code change)
+  - `refactor`: Code refactoring without behavior change
+  - `test`: Adding or fixing tests
+  - `chore`: Routine updates and minor changes
+- Example: `feat: add n8n workflow automation service`
 
-## 4. مستندسازی
-- هر سرویس باید یک فایل `README.md` داشته باشد که شامل:
-  - توضیح مختصر سرویس
-  - نحوه استفاده و راه‌اندازی
-  - متغیرهای محیطی مورد نیاز
-  - پورت‌ها و نقاط دسترسی
-  - لینک‌های مفید (مستندات رسمی و غیره)
+## 4. Documentation
+- Each service must have a `README.md` file that includes:
+  - Brief description of the service
+  - Usage and setup instructions
+  - Required environment variables
+  - Ports and access points
+  - Useful links (official documentation, etc.)
 
-## 5. استانداردهای کد
-- کد باید ساده، قابل‌خواندن و قابل نگهداری باشد
-- از design patternهای رایج استفاده کنید
-- هماهنگی ساختاری و ظاهری با کد موجود را رعایت کنید
+## 5. Code Standards
+- Code should be simple, readable, and maintainable
+- Use common design patterns
+- Maintain structural and visual consistency with existing code
 
-## 6. امنیت و Performance
-- مسائل امنیتی، کارایی و مقیاس‌پذیری را در تنظیمات در نظر داشته باشید
-- از افشای اطلاعات حساس در کدها و فایل‌های کامیت شده خودداری کنید
+## 6. Security and Performance
+- Consider security, performance, and scalability issues in configurations
+- Avoid exposing sensitive information in code and committed files
 
-## 7. اسکریپت مدیریتی
-- برای مدیریت پروژه از اسکریپت `devtools.sh` استفاده کنید
-- این اسکریپت امکان راه‌اندازی و مدیریت همه سرویس‌ها را فراهم می‌کند
+## 7. Management Script
+- Use the `devtools.sh` script for project management
+- This script enables starting and managing all services
 
-## 8. نامگذاری
-- نام فایل‌ها و دایرکتوری‌ها باید معنادار و با حروف کوچک باشد
-- از خط تیره (`-`) برای جدا کردن کلمات در نام فایل‌ها استفاده کنید
+## 8. Naming Conventions
+- File and directory names should be meaningful and lowercase
+- Use hyphens (`-`) to separate words in filenames
 
-## 9. تصمیم‌گیری مستقل
-- در صورت ابهام، با توجه به context پروژه و منطق خود تصمیم بگیرید
-- دلیل تصمیمات مهم را در کامیت یا مستندات ثبت کنید
+## 9. Independent Decision Making
+- In case of ambiguity, make decisions based on the project context and your own logic
+- Document the reasons for important decisions in commits or documentation
 
 ---
 
-> 🎯 هدف اصلی: حفظ کیفیت، یکپارچگی و قابل‌اعتماد بودن تمام سرویس‌ها و کدهای پروژه
+> 🎯 Main Goal: Maintaining quality, integrity, and reliability of all services and code in the project
